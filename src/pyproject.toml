@@ -27,3 +27,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 create-authors = "backend.commands:create_authors"
 create-books = "backend.commands:create_books"
+create-users = "backend.commands:create_users"
