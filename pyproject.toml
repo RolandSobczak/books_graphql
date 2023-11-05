@@ -13,6 +13,7 @@ alembic = "^1.12.1"
 environs = "^9.5.0"
 pydantic-settings = "^2.0.3"
 strawberry-graphql = {extras = ["fastapi"], version = "^0.211.1"}
+psycopg2-binary = "^2.9.9"
 
 
 [build-system]
