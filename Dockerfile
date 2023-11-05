@@ -2,7 +2,7 @@ FROM python:3.12
 
 WORKDIR /src
 
-COPY poetry.lock pyproject.toml /src/
+COPY src/poetry.lock src/pyproject.toml /src/
 
 RUN pip3 install poetry && \
     poetry config virtualenvs.create false && \

@@ -3,7 +3,7 @@ name = "books-graphql"
 version = "0.1.0"
 description = ""
 authors = ["Roland Sobczak <rolandsobczak@icloud.com>"]
-readme = "README.md"
+packages = [{include = "backend"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -12,8 +12,16 @@ sqlalchemy = "^2.0.23"
 alembic = "^1.12.1"
 environs = "^9.5.0"
 pydantic-settings = "^2.0.3"
+strawberry-graphql = {extras = ["fastapi"], version = "^0.211.1"}
+psycopg2-binary = "^2.9.9"
+factory-boy = "^3.3.0"
+click = "^8.1.7"
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+create-authors = "backend.commands:create_authors"
+create-books = "backend.commands:create_books"
