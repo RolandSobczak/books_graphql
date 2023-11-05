@@ -17,4 +17,4 @@ class AuthorFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     first_name = factory.Faker("first_name")
     last_name = factory.Faker("last_name")
-    # books = factory.RelatedFactoryList("backend.factories.BookFactory", factory_related_name="author", size=10)
+    books = factory.RelatedFactoryList("backend.factories.BookFactory", factory_related_name="author", size=10)
