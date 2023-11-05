@@ -13,4 +13,4 @@ class AuthorModel(Base, TimestampedMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     first_name: Mapped[str] = mapped_column(String(255))
     last_name: Mapped[str] = mapped_column(String(255))
-    books: Mapped[List["backend.models.BookModel"]] = relationship(back_populates="author")
+    books: Mapped[List["BookModel"]] = relationship(back_populates="author")

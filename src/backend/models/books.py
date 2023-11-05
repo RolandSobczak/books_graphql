@@ -14,5 +14,5 @@ class BookModel(Base, TimestampedMixin):
     title: Mapped[str] = mapped_column(String(255))
     description: Mapped[str] = mapped_column(String(255))
     author_id: Mapped[int] = mapped_column(ForeignKey("authors.id"))
-    author: Mapped["backend.models.AuthorModel"] = relationship(back_populates="books")
+    author: Mapped["AuthorModel"] = relationship(back_populates="books")
 
