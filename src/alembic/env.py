@@ -5,6 +5,9 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from backend.settings import Settings
+from backend.db import Base
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -24,6 +27,18 @@ target_metadata = None
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+
+def get_connection_string() -> str:
+    settings = Settings()
+
+    return (
+        f"postgresql://{settings.POSTGRES_CONFIG['USER']}:{settings.POSTGRES_CONFIG['PASSWORD']}@"
+        f"{settings.POSTGRES_CONFIG['HOST']}:{settings.POSTGRES_CONFIG['PORT']}/{settings.POSTGRES_CONFIG['DB']}"
+    )
+
+
+config.set_main_option("sqlalchemy.url", get_connection_string())
 
 
 def run_migrations_offline() -> None:
