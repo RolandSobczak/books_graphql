@@ -2,7 +2,6 @@ import strawberry
 from strawberry.types import Info
 
 from backend.services.users import UserService, UserNotFoundException
-from backend.auth import UserNotAuthorizedException
 
 
 @strawberry.type
@@ -39,5 +38,5 @@ class UserMutation:
             )
 
             return UserLoginResponse(access_token=access_token, token_type="bearer")
-        except (UserNotFoundException, UserNotAuthorizedException) as e:
+        except UserNotFoundException as e:
             return ErrorResponse(message=str(e), code="UNAUTHORIZED")

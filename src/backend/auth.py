@@ -1,29 +1,26 @@
+import logging
+
 from jose import JWTError
 
 from backend.services import UserService
 from backend.models import UserModel
 
 
-class UserNotAuthorizedException(Exception):
-    pass
-
-
 def get_current_user(
         token: str,
         user_service: UserService
-) -> UserModel:
-    credentials_exception = UserNotAuthorizedException("Could not validate credentials")
-
+) -> UserModel | None:
     try:
         payload = user_service.decode_access_token(token)
         username: str = payload.get("sub")
         if username is None:
-            raise credentials_exception
+            logging.debug("JWT Token doesn't contain username.")
+        user = user_service.get_user_by_username(username)
+        if user is None:
+            logging.debug(f"User with provided username does not exist. [username={username}]")
+
+        return user
+
     except JWTError:
-        raise credentials_exception
-
-    user = user_service.get_user_by_username(username)
-    # if user is None:
-    #     raise credentials_exception
-
-    return user
+        logging.debug("Invalid JWT token.")
+        return None

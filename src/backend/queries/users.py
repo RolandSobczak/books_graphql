@@ -4,6 +4,7 @@ import strawberry
 from strawberry.types import Info
 
 from backend.services import UserService
+from backend.permissions import IsAuthenticated
 
 
 if TYPE_CHECKING:
@@ -22,7 +23,7 @@ class User:
 @strawberry.type
 class UserQuery:
 
-    @strawberry.field
+    @strawberry.field(permission_classes=[IsAuthenticated])
     async def current_user(self, info: Info) -> User:
         current_user: UserService = info.context["current_user"]
 
