@@ -64,12 +64,14 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li>
+        <a href="#usage">Usage</a>
+        <ul>
+            <li><a href="#how-to-get-demo-data">How to get demo data</a></li>
+        </ul>
+    </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#what-i-have-learned">What I have learned</a></li>
     <li><a href="#license">License</a></li>
@@ -108,28 +110,20 @@
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/RolandSobczak/books_graphql.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
+2. Copy .env examples files from `/env/examples/` info `env/` and remove sufix `.example`
+3. Build image
+   ```shell
+   docker-compose build
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Run the project
+   ```shell
+   docker-compose up
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -139,11 +133,23 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Open `http//localhost:8000/graphql` in browser or postman
 
-_For more examples, please refer to the [Documentation](https://example.com)_
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### How to get demo data
+
+I have prepared bunch of data generation commands using Factory Boy
+
+How to use it?:
+```shell
+docker-compose run backend poetry run create-authors -c 100
+```
+
+Here is the list of available commands:
+
+- create-books
+- create-authors
+- create-users
 
 
 
