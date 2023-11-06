@@ -16,9 +16,10 @@ user_saved_books.append_constraint(unique_together_constraint)
 
 class UserModel(Base):
     __tablename__ = "users"
+    __table_args__ = (UniqueConstraint("username"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(index=True)
+    username: Mapped[str] = mapped_column(String(255))
     hashed_password: Mapped[str] = mapped_column(String(255))
     first_name: Mapped[str] = mapped_column(String(255))
     last_name: Mapped[str] = mapped_column(String(255))
