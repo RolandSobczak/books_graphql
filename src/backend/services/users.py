@@ -5,6 +5,7 @@ from jose import jwt
 from passlib.context import CryptContext
 
 from backend.models import UserModel
+from backend.schemas.users import UserCreateSchema
 from backend.services.base import BaseService
 
 
@@ -48,4 +49,11 @@ class UserService(BaseService):
         if not self.verify_password(password, user.hashed_password):
             raise UserNotFoundException("Username or password is invalid")
 
+        return user
+
+    def create_user(self, user_data: UserCreateSchema) -> Type[UserModel]:
+        user = UserModel(**user_data.model_dump())
+        self.db.add(user)
+        self.db.commit()
+        self.db.refresh(user)
         return user

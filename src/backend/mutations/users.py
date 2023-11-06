@@ -2,6 +2,8 @@ import strawberry
 from strawberry.types import Info
 
 from backend.services.users import UserService, UserNotFoundException
+from backend.schemas.users import UserCreateSchema
+from backend.queries.users import User
 
 
 @strawberry.type
@@ -40,3 +42,19 @@ class UserMutation:
             return UserLoginResponse(access_token=access_token, token_type="bearer")
         except UserNotFoundException as e:
             return ErrorResponse(message=str(e), code="UNAUTHORIZED")
+
+    @strawberry.mutation
+    async def register(self, info: Info, first_name: str, last_name: str, username: str, password: str) -> User:
+        user_service: UserService = info.context["user_service"]
+
+        user_data = UserCreateSchema(
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+            hashed_password=user_service.get_password_hash(password)
+        )
+
+        if user_service.get_user_by_username(username) is not None:
+            raise Exception(f"User {username} already exists.")
+
+        return user_service.create_user(user_data)
