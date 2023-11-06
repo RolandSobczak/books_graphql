@@ -5,6 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.db import Base
 from backend.models.mixins import TimestampedMixin
+from backend.models.users import  user_saved_books
 
 
 class BookModel(Base, TimestampedMixin):
@@ -15,4 +16,6 @@ class BookModel(Base, TimestampedMixin):
     description: Mapped[str] = mapped_column(String(255))
     author_id: Mapped[int] = mapped_column(ForeignKey("authors.id"))
     author: Mapped["AuthorModel"] = relationship(back_populates="books")
+    followers: Mapped[List["UserModel"]] = relationship(secondary=user_saved_books, back_populates="saved_books")
+
 

@@ -16,6 +16,8 @@ strawberry-graphql = {extras = ["fastapi"], version = "^0.211.1"}
 psycopg2-binary = "^2.9.9"
 factory-boy = "^3.3.0"
 click = "^8.1.7"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 
 
 [build-system]
@@ -25,3 +27,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 create-authors = "backend.commands:create_authors"
 create-books = "backend.commands:create_books"
+create-users = "backend.commands:create_users"
